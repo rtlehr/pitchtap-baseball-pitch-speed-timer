@@ -143,18 +143,6 @@ export default function ActionButtons({
         </Button>
       )}
 
-      {isAuthenticated && (
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => setConfirmAction("deleteAccount")}
-          className="w-full text-xs font-bold mt-1 text-destructive hover:text-destructive hover:bg-destructive/10"
-        >
-          <UserX className="w-3.5 h-3.5 mr-1.5" />
-          Delete Account
-        </Button>
-      )}
-
       <AlertDialog open={!!confirmAction} onOpenChange={(open) => !open && setConfirmAction(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
