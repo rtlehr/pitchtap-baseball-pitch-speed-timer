@@ -20,7 +20,7 @@ function TimerTab({ onHelp }) {
   const {
     pitches, distanceFeet, setDistanceFeet, pitchType, setPitchType,
     status, lastMph, elapsedDisplay, sessionHigh,
-    outlierData, pitcherName, showNameModal, showHelp, setShowHelp,
+    outlierData, pitcherName, showNameModal,
     handleTap, handleOutlierRecord, handleOutlierDiscard,
     handleUndo, handleResetType, handleResetAll, handleNewPitcher, handleNameConfirm,
   } = usePitch();
@@ -60,7 +60,6 @@ function TimerTab({ onHelp }) {
         />
       </div>
 
-      <HelpModal open={showHelp} onClose={() => setShowHelp(false)} />
       <PitcherNameModal open={showNameModal} onConfirm={handleNameConfirm} />
       <OutlierDialog
         open={!!outlierData}
