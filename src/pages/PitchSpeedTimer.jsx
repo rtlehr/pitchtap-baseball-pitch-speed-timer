@@ -155,6 +155,11 @@ export default function PitchSpeedTimer() {
     setShowNameModal(true);
   };
 
+  const handleNameConfirm = (name) => {
+    setPitcherName(name);
+    setShowNameModal(false);
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col items-center px-4 py-6 max-w-lg mx-auto no-select">
       {/* Header */}
@@ -163,9 +168,7 @@ export default function PitchSpeedTimer() {
           Pitch Speed Timer
         </h1>
         {pitcherName && (
-          <p className="text-sm font-bold text-muted-foreground mt-0.5">
-            {pitcherName}
-          </p>
+          <p className="text-sm font-bold text-muted-foreground mt-0.5">⚾ {pitcherName}</p>
         )}
       </div>
 
@@ -210,13 +213,7 @@ export default function PitchSpeedTimer() {
       </div>
 
       {/* Pitcher name modal */}
-      <PitcherNameModal
-        open={showNameModal}
-        onConfirm={(name) => {
-          setPitcherName(name);
-          setShowNameModal(false);
-        }}
-      />
+      <PitcherNameModal open={showNameModal} onConfirm={handleNameConfirm} />
 
       {/* Outlier dialog */}
       <OutlierDialog
