@@ -152,6 +152,7 @@ export default function PitchSpeedTimer() {
     setDistanceFeet(60.5);
     setPitchType("Fastball");
     setStatus("ready");
+    setShowNameModal(true);
   };
 
   return (
