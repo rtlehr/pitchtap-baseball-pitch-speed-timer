@@ -23,11 +23,6 @@ export default function ActionButtons({
   onNewPitcher,
 }) {
   const [confirmAction, setConfirmAction] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    base44.auth.isAuthenticated().then(setIsAuthenticated);
-  }, []);
 
   const confirmConfig = {
     resetType: {
