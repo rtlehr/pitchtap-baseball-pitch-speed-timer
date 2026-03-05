@@ -11,6 +11,7 @@ import DistancePicker from "@/components/pitch/DistancePicker";
 import StatsPanel from "@/components/pitch/StatsPanel";
 import ActionButtons from "@/components/pitch/ActionButtons";
 import HelpModal from "@/components/pitch/HelpModal";
+import { useState } from "react";
 import PitcherNameModal from "@/components/pitch/PitcherNameModal";
 import OutlierDialog from "@/components/pitch/OutlierDialog";
 import PitchHistory from "@/components/pitch/PitchHistory";
@@ -20,7 +21,7 @@ function TimerTab({ onHelp }) {
   const {
     pitches, distanceFeet, setDistanceFeet, pitchType, setPitchType,
     status, lastMph, elapsedDisplay, sessionHigh,
-    outlierData, pitcherName, showNameModal, showHelp, setShowHelp,
+    outlierData, pitcherName, showNameModal,
     handleTap, handleOutlierRecord, handleOutlierDiscard,
     handleUndo, handleResetType, handleResetAll, handleNewPitcher, handleNameConfirm,
   } = usePitch();
@@ -60,7 +61,6 @@ function TimerTab({ onHelp }) {
         />
       </div>
 
-      <HelpModal open={showHelp} onClose={() => setShowHelp(false)} />
       <PitcherNameModal open={showNameModal} onConfirm={handleNameConfirm} />
       <OutlierDialog
         open={!!outlierData}
@@ -100,31 +100,27 @@ function HistoryTab() {
   );
 }
 
-function AppShell() {
+export default function PitchSpeedTimer() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { pitcherName, setShowHelp } = usePitch();
-
-  const hash = location.hash;
+  // Derive active tab from URL hash for sub-navigation within this page
+  const hash = location.hash; // "#history" or ""
   const activeTab = hash === "#history" ? "history" : "timer";
 
   const handleTabChange = (tab) => {
-    navigate(tab === "history" ? "#history" : "#", { replace: false });
+    if (tab === "history") {
+      navigate("#history", { replace: false });
+    } else {
+      navigate("#", { replace: false });
+    }
   };
 
   return (
-    <div
-      className="min-h-screen bg-background flex flex-col no-select overflow-x-hidden"
-      style={{ paddingBottom: "calc(56px + env(safe-area-inset-bottom))" }}
-    >
-      <AppHeader
-        activeTab={activeTab}
-        onBack={() => handleTabChange("timer")}
-        onHelp={() => setShowHelp(true)}
-        pitcherName={pitcherName}
-      />
-
-      <div style={{ paddingTop: "calc(52px + env(safe-area-inset-top))" }}>
+    <PitchProvider>
+      <div
+        className="min-h-screen bg-background flex flex-col no-select overflow-x-hidden"
+        style={{ paddingBottom: "calc(56px + env(safe-area-inset-bottom))" }}
+      >
         <AnimatePresence mode="wait" initial={false}>
           {activeTab === "timer" ? (
             <TimerTab key="timer" />
@@ -132,17 +128,9 @@ function AppShell() {
             <HistoryTab key="history" />
           )}
         </AnimatePresence>
+
+        <BottomTabBar activeTab={activeTab} onChange={handleTabChange} />
       </div>
-
-      <BottomTabBar activeTab={activeTab} onChange={handleTabChange} />
-    </div>
-  );
-}
-
-export default function PitchSpeedTimer() {
-  return (
-    <PitchProvider>
-      <AppShell />
     </PitchProvider>
   );
 }
