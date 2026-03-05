@@ -16,6 +16,7 @@ export default function ActionButtons({
   pitches,
   selectedType,
   distanceFeet,
+  pitcherName,
   onUndo,
   onResetType,
   onResetAll,
