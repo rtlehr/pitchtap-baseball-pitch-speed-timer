@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Undo2, Trash2, RotateCcw, UserPlus, Mail } from "lucide-react";
+import { Undo2, Trash2, RotateCcw, UserPlus, Mail, UserX } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,6 +11,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { base44 } from "@/api/base44Client";
 
 export default function ActionButtons({
   pitches,
@@ -23,6 +24,11 @@ export default function ActionButtons({
   onNewPitcher,
 }) {
   const [confirmAction, setConfirmAction] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    base44.auth.isAuthenticated().then(setIsAuthenticated);
+  }, []);
 
   const confirmConfig = {
     resetType: {
