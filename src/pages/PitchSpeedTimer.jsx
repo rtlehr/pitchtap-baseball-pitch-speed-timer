@@ -23,6 +23,7 @@ export default function PitchSpeedTimer() {
   const [outlierData, setOutlierData] = useState(null);
   const [pitcherName, setPitcherName] = useState("");
   const [showNameModal, setShowNameModal] = useState(true);
+  const [showHelp, setShowHelp] = useState(false);
 
   const startTimeRef = useRef(null);
   const animFrameRef = useRef(null);
@@ -173,7 +174,7 @@ export default function PitchSpeedTimer() {
         )}
         <button
           onClick={() => setShowHelp(true)}
-          className="absolute right-0 top-0 w-6 h-6 rounded-full border border-muted-foreground text-muted-foreground text-xs font-bold flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+          className="absolute right-0 top-0 w-6 h-6 rounded-full border border-muted-foreground text-muted-foreground text-xs font-bold hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
         >
           ?
         </button>
