@@ -83,14 +83,6 @@ function HistoryTab() {
       transition={{ type: "tween", duration: 0.2 }}
       className="flex flex-col items-center px-4 py-6 max-w-lg mx-auto w-full"
     >
-      <div className="w-full text-center mb-4">
-        <h1 className="text-lg font-black uppercase tracking-[0.2em] text-primary">
-          Pitch History
-        </h1>
-        {pitcherName && (
-          <p className="text-sm font-bold text-muted-foreground mt-0.5">⚾ {pitcherName}</p>
-        )}
-      </div>
       <div className="w-full">
         <PullToRefresh onRefresh={() => new Promise((r) => setTimeout(r, 500))}>
           <PitchHistory pitches={pitches} />
@@ -100,11 +92,30 @@ function HistoryTab() {
   );
 }
 
+function AppShell({ children, activeTab, onTabChange }) {
+  const [showHelp, setShowHelp] = useState(false);
+  const { pitcherName } = usePitch();
+
+  return (
+    <>
+      <AppHeader
+        activeTab={activeTab}
+        onBack={() => onTabChange("timer")}
+        onHelp={() => setShowHelp(true)}
+        pitcherName={pitcherName}
+      />
+      <div style={{ paddingTop: "calc(52px + env(safe-area-inset-top))" }}>
+        {children}
+      </div>
+      <HelpModal open={showHelp} onClose={setShowHelp} />
+    </>
+  );
+}
+
 export default function PitchSpeedTimer() {
   const location = useLocation();
   const navigate = useNavigate();
-  // Derive active tab from URL hash for sub-navigation within this page
-  const hash = location.hash; // "#history" or ""
+  const hash = location.hash;
   const activeTab = hash === "#history" ? "history" : "timer";
 
   const handleTabChange = (tab) => {
@@ -121,13 +132,15 @@ export default function PitchSpeedTimer() {
         className="min-h-screen bg-background flex flex-col no-select overflow-x-hidden"
         style={{ paddingBottom: "calc(56px + env(safe-area-inset-bottom))" }}
       >
-        <AnimatePresence mode="wait" initial={false}>
-          {activeTab === "timer" ? (
-            <TimerTab key="timer" />
-          ) : (
-            <HistoryTab key="history" />
-          )}
-        </AnimatePresence>
+        <AppShell activeTab={activeTab} onTabChange={handleTabChange}>
+          <AnimatePresence mode="wait" initial={false}>
+            {activeTab === "timer" ? (
+              <TimerTab key="timer" />
+            ) : (
+              <HistoryTab key="history" />
+            )}
+          </AnimatePresence>
+        </AppShell>
 
         <BottomTabBar activeTab={activeTab} onChange={handleTabChange} />
       </div>
