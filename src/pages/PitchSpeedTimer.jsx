@@ -9,6 +9,7 @@ import PitchHistory from "@/components/pitch/PitchHistory";
 import ActionButtons from "@/components/pitch/ActionButtons";
 import OutlierDialog from "@/components/pitch/OutlierDialog";
 import PitcherNameModal from "@/components/pitch/PitcherNameModal";
+import HelpModal from "@/components/pitch/HelpModal";
 
 const REACTION_OFFSET = 0.10;
 
