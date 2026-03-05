@@ -23,7 +23,6 @@ export default function PitchSpeedTimer() {
   const [outlierData, setOutlierData] = useState(null);
   const [pitcherName, setPitcherName] = useState("");
   const [showNameModal, setShowNameModal] = useState(true);
-  const [showHelp, setShowHelp] = useState(false);
 
   const startTimeRef = useRef(null);
   const animFrameRef = useRef(null);
@@ -165,13 +164,19 @@ export default function PitchSpeedTimer() {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center px-4 py-6 max-w-lg mx-auto no-select">
       {/* Header */}
-      <div className="w-full text-center mb-4">
+      <div className="w-full relative text-center mb-4">
         <h1 className="text-lg font-black uppercase tracking-[0.2em] text-primary">
           Pitch Speed Timer
         </h1>
         {pitcherName && (
           <p className="text-sm font-bold text-muted-foreground mt-0.5">⚾ {pitcherName}</p>
         )}
+        <button
+          onClick={() => setShowHelp(true)}
+          className="absolute right-0 top-0 w-6 h-6 rounded-full border border-muted-foreground text-muted-foreground text-xs font-bold flex items-center justify-center hover:border-primary hover:text-primary transition-colors"
+        >
+          ?
+        </button>
       </div>
 
       {/* Distance picker */}
