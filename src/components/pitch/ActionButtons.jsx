@@ -156,7 +156,7 @@ export default function ActionButtons({
                 await cfg?.action();
                 setConfirmAction(null);
               }}
-              className={confirmAction === "deleteAccount" ? "bg-destructive hover:bg-destructive/90" : ""}
+              className=""
             >
               {confirmAction === "deleteAccount" ? "Delete Forever" : "Confirm"}
             </AlertDialogAction>
