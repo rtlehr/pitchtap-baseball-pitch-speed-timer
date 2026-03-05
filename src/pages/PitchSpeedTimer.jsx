@@ -205,6 +205,7 @@ export default function PitchSpeedTimer() {
           pitches={pitches}
           selectedType={pitchType}
           distanceFeet={distanceFeet}
+          pitcherName={pitcherName}
           onUndo={handleUndo}
           onResetType={handleResetType}
           onResetAll={handleResetAll}
