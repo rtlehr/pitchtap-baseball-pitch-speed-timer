@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { PitchProvider, usePitch } from "@/components/pitch/PitchContext";
 import BottomTabBar from "@/components/pitch/BottomTabBar";
+import AppHeader from "@/components/pitch/AppHeader";
 import RadarDisplay from "@/components/pitch/RadarDisplay";
 import TapButton from "@/components/pitch/TapButton";
 import PitchTypeSelector from "@/components/pitch/PitchTypeSelector";
