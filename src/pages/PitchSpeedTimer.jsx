@@ -12,7 +12,6 @@ import PitcherNameModal from "@/components/pitch/PitcherNameModal";
 import HelpModal from "@/components/pitch/HelpModal";
 import BottomTabBar from "@/components/pitch/BottomTabBar";
 import PullToRefresh from "@/components/pitch/PullToRefresh";
-import ThemeProvider from "@/components/ThemeProvider";
 
 const REACTION_OFFSET = 0.10;
 
@@ -167,104 +166,106 @@ export default function PitchSpeedTimer() {
   };
 
   return (
-    <ThemeProvider>
-      <div
-        className="min-h-screen bg-background flex flex-col no-select"
-        style={{ paddingBottom: "calc(56px + env(safe-area-inset-bottom))" }}
-      >
+    <div
+      className="min-h-screen bg-background flex flex-col no-select"
+      style={{ paddingBottom: "calc(56px + env(safe-area-inset-bottom))" }}
+    >
+      {/* Timer Tab */}
+      {activeTab === "timer" && (
         <div className="flex flex-col items-center px-4 py-6 max-w-lg mx-auto w-full">
+          {/* Header */}
+          <div className="w-full relative text-center mb-4">
+            <h1 className="text-lg font-black uppercase tracking-[0.2em] text-primary">
+              Pitch Speed Timer
+            </h1>
+            {pitcherName && (
+              <p className="text-sm font-bold text-muted-foreground mt-0.5">⚾ {pitcherName}</p>
+            )}
+            <button
+              onClick={() => setShowHelp(true)}
+              className="absolute right-0 top-0 w-6 h-6 rounded-full border border-muted-foreground text-muted-foreground text-xs font-bold hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
+            >
+              ?
+            </button>
+          </div>
 
-          {/* Timer Tab */}
-          {activeTab === "timer" && (
-            <>
-              {/* Header */}
-              <div className="w-full relative text-center mb-4">
-                <h1 className="text-lg font-black uppercase tracking-[0.2em] text-primary">
-                  Pitch Speed Timer
-                </h1>
-                {pitcherName && (
-                  <p className="text-sm font-bold text-muted-foreground mt-0.5">⚾ {pitcherName}</p>
-                )}
-                <button
-                  onClick={() => setShowHelp(true)}
-                  className="absolute right-0 top-0 w-6 h-6 rounded-full border border-muted-foreground text-muted-foreground text-xs font-bold hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
-                >
-                  ?
-                </button>
-              </div>
+          {/* Distance picker */}
+          <div className="w-full mb-4">
+            <DistancePicker distance={distanceFeet} onChange={setDistanceFeet} />
+          </div>
 
-              {/* Distance picker */}
-              <div className="w-full mb-4">
-                <DistancePicker distance={distanceFeet} onChange={setDistanceFeet} />
-              </div>
+          {/* Pitch type */}
+          <div className="w-full mb-6">
+            <PitchTypeSelector selected={pitchType} onChange={setPitchType} />
+          </div>
 
-              {/* Pitch type */}
-              <div className="w-full mb-6">
-                <PitchTypeSelector selected={pitchType} onChange={setPitchType} />
-              </div>
+          {/* Radar display */}
+          <div className="mb-6">
+            <RadarDisplay
+              status={status}
+              lastMph={lastMph}
+              sessionHigh={sessionHigh}
+              elapsedDisplay={elapsedDisplay}
+            />
+          </div>
 
-              {/* Radar display */}
-              <div className="mb-6">
-                <RadarDisplay
-                  status={status}
-                  lastMph={lastMph}
-                  sessionHigh={sessionHigh}
-                  elapsedDisplay={elapsedDisplay}
-                />
-              </div>
+          {/* Big tap button */}
+          <div className="mb-8">
+            <TapButton status={status} onTap={handleTap} />
+          </div>
 
-              {/* Big tap button */}
-              <div className="mb-8">
-                <TapButton status={status} onTap={handleTap} />
-              </div>
-
-              {/* Stats */}
-              <div className="w-full space-y-4">
-                <StatsPanel pitches={pitches} selectedType={pitchType} />
-                <ActionButtons
-                  pitches={pitches}
-                  selectedType={pitchType}
-                  distanceFeet={distanceFeet}
-                  pitcherName={pitcherName}
-                  onUndo={handleUndo}
-                  onResetType={handleResetType}
-                  onResetAll={handleResetAll}
-                  onNewPitcher={handleNewPitcher}
-                />
-              </div>
-            </>
-          )}
-
-          {/* History Tab */}
-          {activeTab === "history" && (
-            <div className="w-full">
-              <h2 className="text-lg font-black uppercase tracking-[0.2em] text-primary text-center mb-4">
-                Pitch History
-              </h2>
-              <PullToRefresh onRefresh={() => Promise.resolve()}>
-                <PitchHistory pitches={pitches} />
-              </PullToRefresh>
-            </div>
-          )}
+          {/* Stats */}
+          <div className="w-full space-y-4">
+            <StatsPanel pitches={pitches} selectedType={pitchType} />
+            <ActionButtons
+              pitches={pitches}
+              selectedType={pitchType}
+              distanceFeet={distanceFeet}
+              pitcherName={pitcherName}
+              onUndo={handleUndo}
+              onResetType={handleResetType}
+              onResetAll={handleResetAll}
+              onNewPitcher={handleNewPitcher}
+            />
+          </div>
         </div>
+      )}
 
-        {/* Bottom Tab Bar */}
-        <BottomTabBar activeTab={activeTab} onChange={setActiveTab} />
+      {/* History Tab */}
+      {activeTab === "history" && (
+        <div className="flex flex-col items-center px-4 py-6 max-w-lg mx-auto w-full">
+          <div className="w-full relative text-center mb-4">
+            <h1 className="text-lg font-black uppercase tracking-[0.2em] text-primary">
+              Pitch History
+            </h1>
+            {pitcherName && (
+              <p className="text-sm font-bold text-muted-foreground mt-0.5">⚾ {pitcherName}</p>
+            )}
+          </div>
+          <div className="w-full">
+            <PullToRefresh onRefresh={() => new Promise((r) => setTimeout(r, 500))}>
+              <PitchHistory pitches={pitches} />
+            </PullToRefresh>
+          </div>
+        </div>
+      )}
 
-        {/* Help modal */}
-        <HelpModal open={showHelp} onClose={setShowHelp} />
+      {/* Bottom Tab Bar */}
+      <BottomTabBar activeTab={activeTab} onChange={setActiveTab} />
 
-        {/* Pitcher name modal */}
-        <PitcherNameModal open={showNameModal} onConfirm={handleNameConfirm} />
+      {/* Help modal */}
+      <HelpModal open={showHelp} onClose={setShowHelp} />
 
-        {/* Outlier dialog */}
-        <OutlierDialog
-          open={!!outlierData}
-          mph={outlierData?.mph}
-          onRecord={handleOutlierRecord}
-          onDiscard={handleOutlierDiscard}
-        />
-      </div>
-    </ThemeProvider>
+      {/* Pitcher name modal */}
+      <PitcherNameModal open={showNameModal} onConfirm={handleNameConfirm} />
+
+      {/* Outlier dialog */}
+      <OutlierDialog
+        open={!!outlierData}
+        mph={outlierData?.mph}
+        onRecord={handleOutlierRecord}
+        onDiscard={handleOutlierDiscard}
+      />
+    </div>
   );
 }
