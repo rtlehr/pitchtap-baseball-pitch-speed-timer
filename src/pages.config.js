@@ -47,20 +47,18 @@
  *
  * The mainPage value must match a key in the PAGES object exactly.
  */
-import PitchSpeedTimer from './pages/PitchSpeedTimer';
 import TimerPage from './pages/TimerPage';
 import HistoryPage from './pages/HistoryPage';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
-    "PitchSpeedTimer": PitchSpeedTimer,
     "TimerPage": TimerPage,
     "HistoryPage": HistoryPage,
 }
 
 export const pagesConfig = {
-    mainPage: "PitchSpeedTimer",
+    mainPage: "TimerPage",
     Pages: PAGES,
     Layout: __Layout,
 };
