@@ -48,6 +48,7 @@ export default function ActionButtons({
     const lo = (arr) => (arr.length ? Math.min(...arr).toFixed(1) : "N/A");
 
     let body = `Pitch Speed Report\n\n`;
+    if (pitcherName) body += `Pitcher: ${pitcherName}\n`;
     body += `Distance: ${distanceFeet} ft\n\n`;
     body += `=== Overall ===\n`;
     body += `Pitches: ${pitches.length}\n`;
