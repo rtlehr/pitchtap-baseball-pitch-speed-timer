@@ -1,8 +1,7 @@
-import React, { createContext, useContext, useState, useRef, useCallback } from "react";
+import React, { createContext, useContext, useState, useRef, useCallback, useEffect } from "react";
 import { toast } from "sonner";
 
 const REACTION_OFFSET = 0.10;
-
 const PitchContext = createContext(null);
 
 export function PitchProvider({ children }) {
@@ -21,6 +20,21 @@ export function PitchProvider({ children }) {
   const animFrameRef = useRef(null);
 
   const sessionHigh = pitches.length ? Math.max(...pitches.map((p) => p.mph)) : null;
+
+  // Running timer display — lives here so it works regardless of which page is active
+  useEffect(() => {
+    if (status === "timing") {
+      const tick = () => {
+        if (startTimeRef.current) {
+          const elapsed = (performance.now() - startTimeRef.current) / 1000;
+          setElapsedDisplay(elapsed.toFixed(3));
+        }
+        animFrameRef.current = requestAnimationFrame(tick);
+      };
+      animFrameRef.current = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(animFrameRef.current);
+    }
+  }, [status]);
 
   const calculateMph = useCallback(
     (elapsedSeconds) => {
@@ -120,15 +134,14 @@ export function PitchProvider({ children }) {
         pitches,
         distanceFeet, setDistanceFeet,
         pitchType, setPitchType,
-        status, setStatus,
+        status,
         lastMph,
-        elapsedDisplay, setElapsedDisplay,
+        elapsedDisplay,
         outlierData,
         pitcherName,
         showNameModal,
         showHelp, setShowHelp,
         sessionHigh,
-        animFrameRef,
         handleTap,
         handleOutlierRecord,
         handleOutlierDiscard,

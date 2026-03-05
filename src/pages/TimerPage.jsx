@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import RadarDisplay from "@/components/pitch/RadarDisplay";
 import TapButton from "@/components/pitch/TapButton";
@@ -14,20 +14,11 @@ import { usePitch } from "@/components/pitch/PitchContext";
 export default function TimerPage() {
   const {
     pitches, distanceFeet, setDistanceFeet, pitchType, setPitchType,
-    status, lastMph, elapsedDisplay, sessionHigh, animFrameRef,
+    status, lastMph, elapsedDisplay, sessionHigh,
     outlierData, pitcherName, showNameModal, showHelp, setShowHelp,
     handleTap, handleOutlierRecord, handleOutlierDiscard,
     handleUndo, handleResetType, handleResetAll, handleNewPitcher, handleNameConfirm,
   } = usePitch();
-
-  // Running timer display
-  useEffect(() => {
-    if (status === "timing") {
-      let startTime = null;
-      const { setElapsedDisplay } = require("@/components/pitch/PitchContext");
-      // animFrameRef is managed in context; display updates happen via context tick
-    }
-  }, [status]);
 
   return (
     <motion.div
