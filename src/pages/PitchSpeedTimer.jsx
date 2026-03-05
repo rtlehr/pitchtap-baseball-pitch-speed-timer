@@ -12,6 +12,7 @@ import PitcherNameModal from "@/components/pitch/PitcherNameModal";
 import HelpModal from "@/components/pitch/HelpModal";
 import BottomTabBar from "@/components/pitch/BottomTabBar";
 import PullToRefresh from "@/components/pitch/PullToRefresh";
+import ThemeProvider from "@/components/ThemeProvider";
 
 const REACTION_OFFSET = 0.10;
 
@@ -26,6 +27,7 @@ export default function PitchSpeedTimer() {
   const [pitcherName, setPitcherName] = useState("");
   const [showNameModal, setShowNameModal] = useState(true);
   const [showHelp, setShowHelp] = useState(false);
+  const [activeTab, setActiveTab] = useState("timer");
 
   const startTimeRef = useRef(null);
   const animFrameRef = useRef(null);
