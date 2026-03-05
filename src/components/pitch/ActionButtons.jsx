@@ -30,6 +30,14 @@ export default function ActionButtons({
     base44.auth.isAuthenticated().then(setIsAuthenticated);
   }, []);
 
+  const handleDeleteAccount = async () => {
+    try {
+      await base44.auth.logout();
+    } catch {
+      // logout handles redirect
+    }
+  };
+
   const confirmConfig = {
     resetType: {
       title: `Reset ${selectedType} Pitches?`,
@@ -45,6 +53,12 @@ export default function ActionButtons({
       title: "New Pitcher?",
       desc: "This will clear everything and start fresh for a new pitcher.",
       action: onNewPitcher,
+    },
+    deleteAccount: {
+      title: "Delete Account?",
+      desc: "This action is permanent and cannot be undone. All your data will be removed.",
+      action: handleDeleteAccount,
+      destructive: true,
     },
   };
 
