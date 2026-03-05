@@ -40,14 +40,6 @@ export default function ActionButtons({
       desc: "This will clear everything and start fresh for a new pitcher.",
       action: onNewPitcher,
     },
-    deleteAccount: {
-      title: "Delete Account?",
-      desc: "This will permanently delete your account and all associated data. This action cannot be undone.",
-      action: async () => {
-        await base44.auth.deleteMe();
-        base44.auth.logout("/");
-      },
-    },
   };
 
   const buildEmailBody = () => {
