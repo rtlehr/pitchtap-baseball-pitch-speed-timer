@@ -30,6 +30,14 @@ export default function ActionButtons({
     base44.auth.isAuthenticated().then(setIsAuthenticated);
   }, []);
 
+  const handleDeleteAccount = async () => {
+    try {
+      await base44.auth.logout();
+    } catch {
+      // logout handles redirect
+    }
+  };
+
   const confirmConfig = {
     resetType: {
       title: `Reset ${selectedType} Pitches?`,
@@ -48,11 +56,9 @@ export default function ActionButtons({
     },
     deleteAccount: {
       title: "Delete Account?",
-      desc: "This will permanently delete your account and all associated data. This action cannot be undone.",
-      action: async () => {
-        await base44.auth.deleteMe();
-        base44.auth.logout("/");
-      },
+      desc: "This action is permanent and cannot be undone. All your data will be removed.",
+      action: handleDeleteAccount,
+      destructive: true,
     },
   };
 
@@ -157,6 +163,18 @@ export default function ActionButtons({
         </Button>
       )}
 
+      {isAuthenticated && (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setConfirmAction("deleteAccount")}
+          className="w-full text-xs font-bold mt-2 text-destructive hover:text-destructive hover:bg-destructive/10"
+        >
+          <UserX className="w-3.5 h-3.5 mr-1.5" />
+          Delete Account
+        </Button>
+      )}
+
       <AlertDialog open={!!confirmAction} onOpenChange={(open) => !open && setConfirmAction(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -170,8 +188,9 @@ export default function ActionButtons({
                 cfg?.action();
                 setConfirmAction(null);
               }}
+              className={cfg?.destructive ? "bg-destructive text-destructive-foreground hover:bg-destructive/90" : ""}
             >
-              Confirm
+              {cfg?.destructive ? "Delete Forever" : "Confirm"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
