@@ -16,7 +16,7 @@ import OutlierDialog from "@/components/pitch/OutlierDialog";
 import PitchHistory from "@/components/pitch/PitchHistory";
 import PullToRefresh from "@/components/pitch/PullToRefresh";
 
-function TimerTab() {
+function TimerTab({ onHelp }) {
   const {
     pitches, distanceFeet, setDistanceFeet, pitchType, setPitchType,
     status, lastMph, elapsedDisplay, sessionHigh,
@@ -34,21 +34,6 @@ function TimerTab() {
       transition={{ type: "tween", duration: 0.2 }}
       className="flex flex-col items-center px-4 py-6 max-w-lg mx-auto w-full"
     >
-      <div className="w-full relative text-center mb-4">
-        <h1 className="text-lg font-black uppercase tracking-[0.2em] text-primary">
-          Pitch Speed Timer
-        </h1>
-        {pitcherName && (
-          <p className="text-sm font-bold text-muted-foreground mt-0.5">⚾ {pitcherName}</p>
-        )}
-        <button
-          onClick={() => setShowHelp(true)}
-          className="absolute right-0 top-0 w-6 h-6 rounded-full border border-muted-foreground text-muted-foreground text-xs font-bold hover:border-primary hover:text-primary transition-colors flex items-center justify-center"
-        >
-          ?
-        </button>
-      </div>
-
       <div className="w-full mb-4">
         <DistancePicker distance={distanceFeet} onChange={setDistanceFeet} />
       </div>
