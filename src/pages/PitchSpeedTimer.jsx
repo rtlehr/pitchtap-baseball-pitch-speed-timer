@@ -23,6 +23,7 @@ export default function PitchSpeedTimer() {
   const [outlierData, setOutlierData] = useState(null);
   const [pitcherName, setPitcherName] = useState("");
   const [showNameModal, setShowNameModal] = useState(true);
+  const [showHelp, setShowHelp] = useState(false);
 
   const startTimeRef = useRef(null);
   const animFrameRef = useRef(null);
