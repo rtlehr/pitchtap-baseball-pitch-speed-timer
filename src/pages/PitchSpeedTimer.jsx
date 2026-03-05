@@ -12,7 +12,6 @@ import PitcherNameModal from "@/components/pitch/PitcherNameModal";
 import HelpModal from "@/components/pitch/HelpModal";
 import BottomTabBar from "@/components/pitch/BottomTabBar";
 import PullToRefresh from "@/components/pitch/PullToRefresh";
-import ThemeProvider from "@/components/ThemeProvider";
 
 const REACTION_OFFSET = 0.10;
 
