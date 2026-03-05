@@ -8,6 +8,7 @@ import StatsPanel from "@/components/pitch/StatsPanel";
 import PitchHistory from "@/components/pitch/PitchHistory";
 import ActionButtons from "@/components/pitch/ActionButtons";
 import OutlierDialog from "@/components/pitch/OutlierDialog";
+import PitcherNameModal from "@/components/pitch/PitcherNameModal";
 
 const REACTION_OFFSET = 0.10;
 
