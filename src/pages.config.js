@@ -47,8 +47,14 @@
  *
  * The mainPage value must match a key in the PAGES object exactly.
  */
+import PitchSpeedTimer from './pages/PitchSpeedTimer';
 
-export const pagesConfig = {
-	Pages: {}
+
+export const PAGES = {
+    "PitchSpeedTimer": PitchSpeedTimer,
 }
 
+export const pagesConfig = {
+    mainPage: "PitchSpeedTimer",
+    Pages: PAGES,
+};
