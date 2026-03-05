@@ -20,7 +20,7 @@ function TimerTab({ onHelp }) {
   const {
     pitches, distanceFeet, setDistanceFeet, pitchType, setPitchType,
     status, lastMph, elapsedDisplay, sessionHigh,
-    outlierData, pitcherName, showNameModal,
+    outlierData, pitcherName, showNameModal, showHelp, setShowHelp,
     handleTap, handleOutlierRecord, handleOutlierDiscard,
     handleUndo, handleResetType, handleResetAll, handleNewPitcher, handleNameConfirm,
   } = usePitch();
@@ -60,6 +60,7 @@ function TimerTab({ onHelp }) {
         />
       </div>
 
+      <HelpModal open={showHelp} onClose={() => setShowHelp(false)} />
       <PitcherNameModal open={showNameModal} onConfirm={handleNameConfirm} />
       <OutlierDialog
         open={!!outlierData}
@@ -99,27 +100,31 @@ function HistoryTab() {
   );
 }
 
-export default function PitchSpeedTimer() {
+function AppShell() {
   const location = useLocation();
   const navigate = useNavigate();
-  // Derive active tab from URL hash for sub-navigation within this page
-  const hash = location.hash; // "#history" or ""
+  const { pitcherName, setShowHelp } = usePitch();
+
+  const hash = location.hash;
   const activeTab = hash === "#history" ? "history" : "timer";
 
   const handleTabChange = (tab) => {
-    if (tab === "history") {
-      navigate("#history", { replace: false });
-    } else {
-      navigate("#", { replace: false });
-    }
+    navigate(tab === "history" ? "#history" : "#", { replace: false });
   };
 
   return (
-    <PitchProvider>
-      <div
-        className="min-h-screen bg-background flex flex-col no-select overflow-x-hidden"
-        style={{ paddingBottom: "calc(56px + env(safe-area-inset-bottom))" }}
-      >
+    <div
+      className="min-h-screen bg-background flex flex-col no-select overflow-x-hidden"
+      style={{ paddingBottom: "calc(56px + env(safe-area-inset-bottom))" }}
+    >
+      <AppHeader
+        activeTab={activeTab}
+        onBack={() => handleTabChange("timer")}
+        onHelp={() => setShowHelp(true)}
+        pitcherName={pitcherName}
+      />
+
+      <div style={{ paddingTop: "calc(52px + env(safe-area-inset-top))" }}>
         <AnimatePresence mode="wait" initial={false}>
           {activeTab === "timer" ? (
             <TimerTab key="timer" />
@@ -127,9 +132,17 @@ export default function PitchSpeedTimer() {
             <HistoryTab key="history" />
           )}
         </AnimatePresence>
-
-        <BottomTabBar activeTab={activeTab} onChange={handleTabChange} />
       </div>
+
+      <BottomTabBar activeTab={activeTab} onChange={handleTabChange} />
+    </div>
+  );
+}
+
+export default function PitchSpeedTimer() {
+  return (
+    <PitchProvider>
+      <AppShell />
     </PitchProvider>
   );
 }
