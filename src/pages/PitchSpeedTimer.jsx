@@ -20,11 +20,12 @@ import PullToRefresh from "@/components/pitch/PullToRefresh";
 
 function TimerTab({ onHelp }) {
   const {
-    pitches, distanceFeet, setDistanceFeet, pitchType, setPitchType,
+    pitches, strikeBallLog, distanceFeet, setDistanceFeet, pitchType, setPitchType,
     status, lastMph, elapsedDisplay, sessionHigh,
     outlierData, pitcherName, showNameModal,
     handleTap, handleOutlierRecord, handleOutlierDiscard,
     handleUndo, handleResetType, handleResetAll, handleNewPitcher, handleNameConfirm,
+    handleStrike, handleBall,
   } = usePitch();
 
   return (
