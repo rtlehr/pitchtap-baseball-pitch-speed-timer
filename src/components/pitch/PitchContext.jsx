@@ -111,18 +111,23 @@ export function PitchProvider({ children }) {
 
   const handleResetAll = () => {
     setPitches([]);
+    setStrikeBallLog([]);
     setLastMph(null);
     setStatus("ready");
   };
 
   const handleNewPitcher = () => {
     setPitches([]);
+    setStrikeBallLog([]);
     setLastMph(null);
     setDistanceFeet(60.5);
-    setPitchType("Fastball");
+    setPitchType("4-Seam");
     setStatus("ready");
     setShowNameModal(true);
   };
+
+  const handleStrike = () => setStrikeBallLog((prev) => [...prev, "strike"]);
+  const handleBall = () => setStrikeBallLog((prev) => [...prev, "ball"]);
 
   const handleNameConfirm = (name) => {
     setPitcherName(name);
