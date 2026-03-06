@@ -138,6 +138,7 @@ export function PitchProvider({ children }) {
     <PitchContext.Provider
       value={{
         pitches,
+        strikeBallLog,
         distanceFeet, setDistanceFeet,
         pitchType, setPitchType,
         status,
@@ -156,6 +157,8 @@ export function PitchProvider({ children }) {
         handleResetAll,
         handleNewPitcher,
         handleNameConfirm,
+        handleStrike,
+        handleBall,
       }}
     >
       {children}
