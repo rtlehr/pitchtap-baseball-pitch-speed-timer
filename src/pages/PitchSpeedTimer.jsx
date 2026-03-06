@@ -46,11 +46,14 @@ function TimerTab({ onHelp }) {
       <div className="mb-6">
         <RadarDisplay status={status} lastMph={lastMph} sessionHigh={sessionHigh} elapsedDisplay={elapsedDisplay} />
       </div>
-      <div className="mb-8">
+      <div className="mb-4">
         <TapButton status={status} onTap={handleTap} />
       </div>
+      <div className="mb-6">
+        <StrikeBallButtons onStrike={handleStrike} onBall={handleBall} status={status} />
+      </div>
       <div className="w-full space-y-4">
-        <StatsPanel pitches={pitches} selectedType={pitchType} />
+        <StatsPanel pitches={pitches} selectedType={pitchType} strikeBallLog={strikeBallLog} />
         <ActionButtons
           pitches={pitches}
           selectedType={pitchType}
