@@ -23,7 +23,7 @@ export default function StrikeBallButtons({ onStrike, onBall, status }) {
         onClick={onBall}
         disabled={disabled}
         className={`
-          no-select flex-1 py-3 rounded-lg text-sm font-bold uppercase tracking-wider
+          no-select flex-1 py-3 px-5 rounded-lg text-sm font-bold uppercase tracking-wider
           transition-colors border border-border
           ${disabled
             ? "bg-secondary/50 text-muted-foreground cursor-not-allowed"
