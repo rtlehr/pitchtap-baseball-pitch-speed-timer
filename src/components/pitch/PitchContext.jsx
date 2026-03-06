@@ -6,8 +6,9 @@ const PitchContext = createContext(null);
 
 export function PitchProvider({ children }) {
   const [pitches, setPitches] = useState([]);
+  const [strikeBallLog, setStrikeBallLog] = useState([]); // array of "strike" | "ball"
   const [distanceFeet, setDistanceFeet] = useState(60.5);
-  const [pitchType, setPitchType] = useState("Fastball");
+  const [pitchType, setPitchType] = useState("4-Seam");
   const [status, setStatus] = useState("ready");
   const [lastMph, setLastMph] = useState(null);
   const [elapsedDisplay, setElapsedDisplay] = useState("0.000");
