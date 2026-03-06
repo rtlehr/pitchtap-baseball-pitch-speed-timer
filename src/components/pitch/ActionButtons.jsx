@@ -14,6 +14,7 @@ import {
 
 export default function ActionButtons({
   pitches,
+  strikeBallLog,
   selectedType,
   distanceFeet,
   pitcherName,
