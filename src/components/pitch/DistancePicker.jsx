@@ -64,6 +64,34 @@ export default function DistancePicker({ distance, onChange }) {
               );
             })}
           </div>
+
+          <div className="px-4 pb-8">
+            <div className="border-t border-border pt-4">
+              <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider mb-2">Custom Distance</p>
+              <div className="flex gap-2">
+                <Input
+                  type="number"
+                  placeholder="Enter feet (e.g. 52)"
+                  value={customInput}
+                  onChange={(e) => setCustomInput(e.target.value)}
+                  className="flex-1"
+                />
+                <Button
+                  onClick={() => {
+                    const val = parseFloat(customInput);
+                    if (!isNaN(val) && val > 0) {
+                      onChange(val);
+                      setCustomInput("");
+                      setOpen(false);
+                    }
+                  }}
+                  disabled={!customInput || isNaN(parseFloat(customInput)) || parseFloat(customInput) <= 0}
+                >
+                  Set
+                </Button>
+              </div>
+            </div>
+          </div>
         </DrawerContent>
       </Drawer>
     </>
