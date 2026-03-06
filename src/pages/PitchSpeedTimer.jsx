@@ -10,6 +10,7 @@ import PitchTypeSelector from "@/components/pitch/PitchTypeSelector";
 import DistancePicker from "@/components/pitch/DistancePicker";
 import StatsPanel from "@/components/pitch/StatsPanel";
 import ActionButtons from "@/components/pitch/ActionButtons";
+import StrikeBallButtons from "@/components/pitch/StrikeBallButtons";
 import HelpModal from "@/components/pitch/HelpModal";
 import { useState } from "react";
 import PitcherNameModal from "@/components/pitch/PitcherNameModal";
