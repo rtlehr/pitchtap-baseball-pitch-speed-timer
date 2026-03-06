@@ -69,6 +69,16 @@ export default function ActionButtons({
       }
     });
 
+    if (strikeBallLog && strikeBallLog.length > 0) {
+      const strikes = strikeBallLog.filter((x) => x === "strike").length;
+      const total = strikeBallLog.length;
+      const pct = ((strikes / total) * 100).toFixed(1);
+      body += `=== Strike / Ball ===\n`;
+      body += `Strike %: ${pct}%\n`;
+      body += `Strikes: ${strikes}\n`;
+      body += `Balls: ${total - strikes}\n\n`;
+    }
+
     const last10 = pitches.slice(-10).reverse();
     if (last10.length) {
       body += `=== Last ${last10.length} Pitches ===\n`;
