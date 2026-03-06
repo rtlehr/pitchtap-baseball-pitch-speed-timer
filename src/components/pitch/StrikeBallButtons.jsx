@@ -4,7 +4,7 @@ export default function StrikeBallButtons({ onStrike, onBall, status }) {
   const disabled = status === "timing";
 
   return (
-    <div className="flex gap-3 w-full max-w-xs">
+    <div className="flex gap-3 w-full max-w-sm">
       <button
         onClick={onStrike}
         disabled={disabled}
