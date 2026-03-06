@@ -14,7 +14,10 @@ const PRESETS = [
 
 export default function DistancePicker({ distance, onChange }) {
   const [open, setOpen] = useState(false);
-  const selected = PRESETS.find((p) => p.value === String(distance)) || PRESETS[0];
+  const [customInput, setCustomInput] = useState("");
+  const selected = PRESETS.find((p) => p.value === String(distance));
+  const displayLabel = selected ? selected.label : `${distance} ft`;
+  const displaySub = selected ? selected.sub : "Custom";
 
   return (
     <>
