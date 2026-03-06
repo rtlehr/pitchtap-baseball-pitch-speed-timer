@@ -56,6 +56,7 @@ function TimerTab({ onHelp }) {
         <StatsPanel pitches={pitches} selectedType={pitchType} strikeBallLog={strikeBallLog} />
         <ActionButtons
           pitches={pitches}
+          strikeBallLog={strikeBallLog}
           selectedType={pitchType}
           distanceFeet={distanceFeet}
           pitcherName={pitcherName}
