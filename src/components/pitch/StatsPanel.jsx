@@ -14,13 +14,17 @@ function StatBox({ label, value, unit = "MPH", small = false }) {
   );
 }
 
-export default function StatsPanel({ pitches, selectedType }) {
+export default function StatsPanel({ pitches, selectedType, strikeBallLog }) {
   const allSpeeds = pitches.map((p) => p.mph);
   const typeSpeeds = pitches.filter((p) => p.pitchType === selectedType).map((p) => p.mph);
 
   const avg = (arr) => (arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : null);
   const hi = (arr) => (arr.length ? Math.max(...arr) : null);
   const lo = (arr) => (arr.length ? Math.min(...arr) : null);
+
+  const strikes = strikeBallLog.filter((x) => x === "strike").length;
+  const totalCalled = strikeBallLog.length;
+  const strikePercent = totalCalled > 0 ? (strikes / totalCalled) * 100 : null;
 
   return (
     <div className="space-y-3">
@@ -31,6 +35,15 @@ export default function StatsPanel({ pitches, selectedType }) {
         <StatBox label="High" value={hi(allSpeeds)} />
         <StatBox label="Low" value={lo(allSpeeds)} />
       </div>
+
+      {/* Strike % */}
+      {totalCalled > 0 && (
+        <div className="grid grid-cols-3 gap-2 bg-card rounded-xl p-3 border border-border">
+          <StatBox label="Strike %" value={strikePercent} unit="%" />
+          <StatBox label="Strikes" value={strikes} unit="called" />
+          <StatBox label="Balls" value={totalCalled - strikes} unit="called" />
+        </div>
+      )}
 
       {/* Selected type stats */}
       {typeSpeeds.length > 0 && (
