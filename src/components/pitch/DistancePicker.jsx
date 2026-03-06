@@ -29,8 +29,8 @@ export default function DistancePicker({ distance, onChange }) {
           onClick={() => setOpen(true)}
           className="flex-1 flex items-center justify-between px-3 py-2 rounded-lg bg-secondary border border-border text-sm font-bold text-foreground"
         >
-          <span>{selected.label}</span>
-          <span className="text-xs text-muted-foreground font-normal">{selected.sub}</span>
+          <span>{displayLabel}</span>
+          <span className="text-xs text-muted-foreground font-normal">{displaySub}</span>
         </button>
       </div>
 
