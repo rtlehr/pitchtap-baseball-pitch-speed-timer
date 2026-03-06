@@ -13,6 +13,7 @@ export default function HelpModal({ open, onClose }) {
           <li><span className="font-bold">Tap</span> the big button when the pitcher releases the ball.</li>
           <li><span className="font-bold">Tap again</span> when the ball hits the catcher's mitt.</li>
           <li>Speed is calculated automatically and added to your session stats.</li>
+          <li><span className="font-bold">Optionally</span>, tap <span className="font-bold">Strike</span> or <span className="font-bold">Ball</span> after each pitch to track command — your strike % will appear in the stats.</li>
           <li>Use <span className="font-bold">Undo Last</span> to remove a bad reading.</li>
           <li>Tap <span className="font-bold">New Pitcher</span> to start a fresh session.</li>
         </ol>
