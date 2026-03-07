@@ -14,8 +14,8 @@ export function PitchProvider({ children }) {
   const [elapsedDisplay, setElapsedDisplay] = useState("0.000");
   const [outlierData, setOutlierData] = useState(null);
   const [pitcherName, setPitcherName] = useState("");
-  const [showNameModal, setShowNameModal] = useState(true);
-  const [showHelp, setShowHelp] = useState(false);
+  const [showNameModal, setShowNameModal] = useState(false);
+  const [showHelp, setShowHelp] = useState(true);
 
   const startTimeRef = useRef(null);
   const animFrameRef = useRef(null);
