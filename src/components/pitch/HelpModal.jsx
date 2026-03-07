@@ -16,6 +16,7 @@ export default function HelpModal({ open, onClose }) {
           <li><span className="font-bold">Optionally</span>, tap <span className="font-bold">Strike</span> or <span className="font-bold">Ball</span> after each pitch to track command — your strike % will appear in the stats.</li>
           <li>Use <span className="font-bold">Undo Last</span> to remove a bad reading.</li>
           <li>Tap <span className="font-bold">New Pitcher</span> to start a fresh session.</li>
+          <li>Tap <span className="font-bold">Email Pitch Report</span> to send your session stats (speeds, pitch types, strike %) via email.</li>
         </ol>
         <p className="text-xs text-muted-foreground mt-2">A 0.1s reaction-time offset is applied automatically.</p>
       </DialogContent>
