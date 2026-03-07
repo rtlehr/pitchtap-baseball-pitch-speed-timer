@@ -99,21 +99,29 @@ function HistoryTab() {
 }
 
 function AppShell({ children, activeTab, onTabChange }) {
-  const [showHelp, setShowHelp] = useState(false);
-  const { pitcherName } = usePitch();
+  const [showHelpManual, setShowHelpManual] = useState(false);
+  const { pitcherName, showHelp, handleHelpClose, setShowHelp } = usePitch();
+
+  const isHelpOpen = showHelp || showHelpManual;
+  const handleClose = (open) => {
+    if (!open) {
+      if (showHelp) handleHelpClose();
+      else setShowHelpManual(false);
+    }
+  };
 
   return (
     <>
       <AppHeader
         activeTab={activeTab}
         onBack={() => onTabChange("timer")}
-        onHelp={() => setShowHelp(true)}
+        onHelp={() => setShowHelpManual(true)}
         pitcherName={pitcherName}
       />
       <div style={{ paddingTop: "calc(52px + env(safe-area-inset-top))" }}>
         {children}
       </div>
-      <HelpModal open={showHelp} onClose={setShowHelp} />
+      <HelpModal open={isHelpOpen} onClose={handleClose} />
     </>
   );
 }
