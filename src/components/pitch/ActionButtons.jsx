@@ -58,7 +58,9 @@ export default function ActionButtons({
     body += `High: ${hi(allSpeeds)} MPH\n`;
     body += `Low: ${lo(allSpeeds)} MPH\n\n`;
 
-    ["Fastball", "Curve", "Slider", "Misc"].forEach((type) => {
+    const allPitchTypes = ["4-Seam", "2-Seam", "Change-up", "Curve", "Slider", "Misc"];
+
+    allPitchTypes.forEach((type) => {
       const speeds = pitches.filter((p) => p.pitchType === type).map((p) => p.mph);
       if (speeds.length) {
         body += `=== ${type} ===\n`;
@@ -70,13 +72,28 @@ export default function ActionButtons({
     });
 
     if (strikeBallLog && strikeBallLog.length > 0) {
-      const strikes = strikeBallLog.filter((x) => x === "strike").length;
+      const getResult = (x) => x?.result ?? x;
+      const strikes = strikeBallLog.filter((x) => getResult(x) === "strike").length;
       const total = strikeBallLog.length;
       const pct = ((strikes / total) * 100).toFixed(1);
       body += `=== Strike / Ball ===\n`;
-      body += `Strike %: ${pct}%\n`;
-      body += `Strikes: ${strikes}\n`;
-      body += `Balls: ${total - strikes}\n\n`;
+      body += `Overall Strike %: ${pct}%\n`;
+      body += `Strikes: ${strikes} | Balls: ${total - strikes} | Total: ${total}\n\n`;
+
+      // Per pitch type breakdown
+      const typesWithCalls = allPitchTypes.filter((type) =>
+        strikeBallLog.some((x) => x?.pitchType === type)
+      );
+      if (typesWithCalls.length > 0) {
+        body += `--- Strike % by Pitch Type ---\n`;
+        typesWithCalls.forEach((type) => {
+          const typeCalls = strikeBallLog.filter((x) => x?.pitchType === type);
+          const typeStrikes = typeCalls.filter((x) => getResult(x) === "strike").length;
+          const typePct = ((typeStrikes / typeCalls.length) * 100).toFixed(1);
+          body += `${type}: ${typePct}% (${typeStrikes}/${typeCalls.length})\n`;
+        });
+        body += `\n`;
+      }
     }
 
     const last10 = pitches.slice(-10).reverse();
