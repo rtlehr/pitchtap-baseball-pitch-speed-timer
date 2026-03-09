@@ -126,8 +126,8 @@ export function PitchProvider({ children }) {
     setShowNameModal(true);
   };
 
-  const handleStrike = () => setStrikeBallLog((prev) => [...prev, "strike"]);
-  const handleBall = () => setStrikeBallLog((prev) => [...prev, "ball"]);
+  const handleStrike = () => setStrikeBallLog((prev) => [...prev, { result: "strike", pitchType }]);
+  const handleBall = () => setStrikeBallLog((prev) => [...prev, { result: "ball", pitchType }]);
 
   const handleNameConfirm = (name) => {
     setPitcherName(name);
