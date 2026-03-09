@@ -22,7 +22,7 @@ export default function StatsPanel({ pitches, selectedType, strikeBallLog }) {
   const hi = (arr) => (arr.length ? Math.max(...arr) : null);
   const lo = (arr) => (arr.length ? Math.min(...arr) : null);
 
-  const strikes = strikeBallLog.filter((x) => x === "strike").length;
+  const strikes = strikeBallLog.filter((x) => (x?.result ?? x) === "strike").length;
   const totalCalled = strikeBallLog.length;
   const strikePercent = totalCalled > 0 ? (strikes / totalCalled) * 100 : null;
 
