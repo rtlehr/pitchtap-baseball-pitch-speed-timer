@@ -23,7 +23,7 @@ function TimerTab({ onHelp }) {
     pitches, strikeBallLog, distanceFeet, setDistanceFeet, pitchType, setPitchType,
     status, lastMph, elapsedDisplay, sessionHigh,
     outlierData, pitcherName, showNameModal,
-    handleTap, handleOutlierRecord, handleOutlierDiscard,
+    handlePressStart, handlePressEnd, handleOutlierRecord, handleOutlierDiscard,
     handleUndo, handleResetType, handleResetAll, handleNewPitcher, handleNameConfirm,
     handleStrike, handleBall,
   } = usePitch();
