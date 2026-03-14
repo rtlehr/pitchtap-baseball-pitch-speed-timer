@@ -57,12 +57,16 @@ export function PitchProvider({ children }) {
     [pitchType, distanceFeet]
   );
 
-  const handleTap = useCallback(() => {
+  const handlePressStart = useCallback(() => {
     if (status === "ready" || status === "recorded") {
       startTimeRef.current = performance.now();
       setStatus("timing");
       setElapsedDisplay("0.000");
-    } else if (status === "timing") {
+    }
+  }, [status]);
+
+  const handlePressEnd = useCallback(() => {
+    if (status === "timing") {
       const endTime = performance.now();
       const elapsedSeconds = (endTime - startTimeRef.current) / 1000;
       cancelAnimationFrame(animFrameRef.current);
