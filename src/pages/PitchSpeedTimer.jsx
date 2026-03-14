@@ -47,7 +47,7 @@ function TimerTab({ onHelp }) {
         <RadarDisplay status={status} lastMph={lastMph} sessionHigh={sessionHigh} elapsedDisplay={elapsedDisplay} />
       </div>
       <div className="mb-4">
-        <TapButton status={status} onTap={handleTap} />
+        <TapButton status={status} onPressStart={handlePressStart} onPressEnd={handlePressEnd} />
       </div>
       <div className="mb-6">
         <StrikeBallButtons onStrike={handleStrike} onBall={handleBall} status={status} />
